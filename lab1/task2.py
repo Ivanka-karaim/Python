@@ -1,8 +1,8 @@
 import argparse
 import operator
-vocabulary1 = {"add", "sub", "mul", "div", "pow", "mod"}
+vocabulary1 = {"add", "sub", "mul", "truediv", "pow", "mod"}
 vocabulary2 = {"abs", "neg", "pos"}
-vocabulary = {"add", "sub", "mul", "div", "pow", "mod", "abs", "neg", "pos"}
+vocabulary = {"add", "sub", "mul", "truediv", "pow", "mod", "abs", "neg", "pos"}
 parser = argparse.ArgumentParser()
 parser.add_argument("operation", help="operator", type=str, choices=vocabulary)
 parser.add_argument("operands", nargs="*")
