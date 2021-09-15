@@ -22,4 +22,3 @@ if (expression == "") or (expression[0] in Sign) or (expression[len(expression) 
     print((False, None))
     exit(1)
 print(check(0))
-
