@@ -16,4 +16,4 @@ for i in range(length + 1):
             Matrix[i][j] = max(Bars[i - 1] + Matrix[i - 1][j - Bars[i - 1]], Matrix[i - 1][j])
         else:
             Matrix[i][j] = Matrix[i - 1][j]
-print("Max: ", Matrix[len(Bars)][args.capacity])
+print("Max: ", Matrix[length][args.capacity])
