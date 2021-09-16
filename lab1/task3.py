@@ -18,7 +18,8 @@ def check(index):
 
 
 expression = str(input("Enter expression: "))
-if (expression == "") or (expression[0] not in Number and expression[0] != '-') or (expression[len(expression) - 1] not in Number):
+if ((expression == "") or (expression[0] not in Number and expression[0] != '-') or
+    (expression[len(expression) - 1] not in Number)):
     print((False, None))
     exit(1)
 print(check(1))
