@@ -4,16 +4,17 @@ vocabulary1 = {"add", "sub", "mul", "truediv", "pow", "mod"}
 vocabulary2 = {"abs", "neg", "pos"}
 vocabulary = {"add", "sub", "mul", "truediv", "pow", "mod", "abs", "neg", "pos"}
 parser = argparse.ArgumentParser()
-parser.add_argument("operation", help="operator", type=str, choices=vocabulary)
+parser.add_argument("operation", help="operator", type=str)
 parser.add_argument("operands", nargs="*")
 args = parser.parse_args()
-if args.operation in vocabulary1:
-    if len(args.operands) == 2:
-        print(eval("operator."+args.operation)(int(args.operands[0]), int(args.operands[1])))
+try:
+    if args.operation in vocabulary1:
+        result = eval("operator." + args.operation)(int(args.operands[0]), int(args.operands[1]))
+        print(result)
     else:
-        print("Wrong number of operands")
-if args.operation in vocabulary2:
-    if len(args.operands) == 1:
-        print(eval("operator."+args.operation)(int(args.operands[0])))
-    else:
-        print("Wrong number of operands")
+        result = eval("operator." + args.operation)(int(args.operands[0]))
+        print(result)
+except IndexError:
+    print("Error with number of values!")
+except:
+    print("Error! Incorrect function!")

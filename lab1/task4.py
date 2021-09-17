@@ -10,7 +10,7 @@ length = len(Bars)
 Matrix = [[0 for j in range(args.capacity + 1)] for i in range(length + 1)]
 for i in range(length + 1):
     for j in range(args.capacity + 1):
-        if i == 0 or j == 0:
+        if not i or not j:
             Matrix[i][j] = 0
         elif Bars[i - 1] <= j:
             Matrix[i][j] = max(Bars[i - 1] + Matrix[i - 1][j - Bars[i - 1]], Matrix[i - 1][j])
