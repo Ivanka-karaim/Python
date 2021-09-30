@@ -29,6 +29,6 @@ class Rational:
 
 
 
-A = Rational(1, 2)
+A = Rational(-1, -2)
 print(A.get())
 print(A.get1())
