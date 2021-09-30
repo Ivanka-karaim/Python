@@ -6,33 +6,29 @@ class Rational:
     __denominator = 2
 
     def __init__(self, numerator, denominator):
-        if denominator == 0:
-            print("Error. Division by zero...")
-        elif not isinstance(numerator, int) or not isinstance(denominator, int):
-            print("Error. Incorrect data entered...")
-        elif numerator < 0 and denominator < 0:
-            numerator *= -1
-            denominator *= -1
+        if isinstance(numerator, int) or isinstance(denominator, int):
+            pass
         else:
-            x = math.gcd(numerator, denominator)
-            self.__numerator = numerator//x
-            self.__denominator = denominator//x
+            ind = True
+            if denominator == 0:
+            # print("Error. Division by zero...")
+                ind = False
+            elif numerator < 0 and denominator < 0:
+                numerator *= -1
+                denominator *= -1
+            elif ind:
+                x = math.gcd(numerator, denominator)
+                self.__numerator = numerator//x
+                self.__denominator = denominator//x
 
     def get(self):
-        print(self.__numerator, '/', self.__denominator)
+        return str(self.__numerator)+'/' + str(self.__denominator)
 
     def get1(self):
-        print(self.__numerator/self.__denominator)
+        return self.__numerator/self.__denominator
 
 
-num = input("Enter numerator: ")
-den = input("Enter denominator: ")
-try:
-    num = int(num)
-    den = int(den)
-except:
-    print("Error. Variables must be of type int")
-    exit(1)
-A = Rational(num, den)
-A.get()
-A.get1()
+
+A = Rational(1, 2)
+print(A.get())
+print(A.get1())

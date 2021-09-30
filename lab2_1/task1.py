@@ -1,6 +1,8 @@
 class Rectangle:
-    length = 1
-    width = 1
+
+    def __init__(self):
+        self.length = 1
+        self.width = 1
 
     def area(self):
         return self.length * self.width
@@ -13,15 +15,17 @@ class Rectangle:
             length = float(length)
             width = float(width)
         except:
-            print("Error. Variables must be of type float")
+            #print("Error. Variables must be of type float")
             return 0
         if not 0 < length < 20:
-            print("Error. The length is entered incorrectly...")
+            #print("Error. The length is entered incorrectly...")
+            pass
         else:
             self.length = length
 
         if not 0 < width < 20:
-            print("Error. The width is entered incorrectly...")
+            #print("Error. The width is entered incorrectly...")
+            pass
         else:
             self.width = width
 
