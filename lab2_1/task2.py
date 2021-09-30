@@ -2,10 +2,8 @@ import math
 
 
 class Rational:
-    __numerator = 1
-    __denominator = 1
 
-    def __init__(self, numerator, denominator):
+    def __init__(self, numerator=1, denominator=1):
         if isinstance(numerator, int) and isinstance(denominator, int):
             ind = True
             if denominator == 0:
@@ -17,6 +15,9 @@ class Rational:
                 x = math.gcd(numerator, denominator)
                 self.__numerator = numerator//x
                 self.__denominator = denominator//x
+        else:
+            self.__numerator = 1
+            self.__denominator = 1
 
     def get(self):
         return str(self.__numerator) + '/' + str(self.__denominator)
