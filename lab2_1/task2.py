@@ -15,11 +15,11 @@ class Rational:
             denominator *= -1
         else:
             x = math.gcd(numerator, denominator)
-            self.__numerator = numerator/x
-            self.__denominator = denominator/x
+            self.__numerator = numerator//x
+            self.__denominator = denominator//x
 
     def get(self):
-        print(int(self.__numerator), '/', int(self.__denominator))
+        print(self.__numerator, '/', self.__denominator)
 
     def get1(self):
         print(self.__numerator/self.__denominator)
