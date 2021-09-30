@@ -13,26 +13,16 @@ class Rectangle:
     def setter(self, length, width):
         try:
             length = float(length)
-
         except:
-            #print("Error. Variables must be of type float")
             pass
         try:
             width = float(width)
-
         except:
-            #print("Error. Variables must be of type float")
             pass
-        if not isinstance(length, float) or not 0 < length < 20:
-            #print("Error. The length is entered incorrectly...")
-            pass
-        else:
+        if isinstance(length, float) and 0 < length < 20:
             self.length = length
 
-        if not isinstance(width, float) or not 0 < width < 20:
-            #print("Error. The width is entered incorrectly...")
-            pass
-        else:
+        if isinstance(width, float) and 0 < width < 20:
             self.width = width
 
     def getter(self):
