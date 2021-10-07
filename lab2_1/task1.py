@@ -1,8 +1,8 @@
 class Rectangle:
 
     def __init__(self):
-        self.length = 1
-        self.width = 1
+        self.length = 1.0
+        self.width = 1.0
 
     def area(self):
         return self.length * self.width
@@ -11,19 +11,12 @@ class Rectangle:
         return 2*(self.length+self.width)
 
     def setter(self, length, width):
-        try:
-            length = float(length)
-        except:
-            pass
-        try:
-            width = float(width)
-        except:
-            pass
-        if isinstance(length, float) and 0 < length < 20:
-            self.length = length
-
-        if isinstance(width, float) and 0 < width < 20:
-            self.width = width
+        if not isinstance(length, float) or not isinstance(width, float):
+            raise TypeError("Wrong type!")
+        if not 0 < length < 20 or not 0 < width < 20:
+            raise ValueError("Wrong value!")
+        self.length = length
+        self.width = width
 
     def getter(self):
         return self.length, self.width
@@ -32,8 +25,6 @@ class Rectangle:
 rectangle1 = Rectangle()
 print("Data: ", rectangle1.getter())
 print("Area: ", rectangle1.area())
-length_my = input("Enter length: ")
-width_my = input("Enter width: ")
-rectangle1.setter(length_my, width_my)
+rectangle1.setter(2.0, 3)
 print("Data: ", rectangle1.getter())
 print("Perimeter: ", rectangle1.perimeter())
