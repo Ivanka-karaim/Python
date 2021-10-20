@@ -8,9 +8,8 @@ class Rational:
             raise TypeError("Wrong type!")
         if not denominator:
             raise ValueError("Wrong value!")
-        if numerator <= 0 and denominator < 0:
-            numerator *= -1
-            denominator *= -1
+        numerator = abs(numerator)
+        denominator = abs(denominator)
         x = math.gcd(numerator, denominator)
         self.__numerator = numerator // x
         self.__denominator = denominator // x
