@@ -44,7 +44,7 @@ class Node:
     @code.setter
     def code(self, code):
         if not isinstance(code, int):
-            raise TypeError("Wrong type of code ")
+            raise TypeError("Wrong type of code "),
         if code <= 0:
             raise ValueError("Wrong value of code(code>0)")
         self.__code = code
