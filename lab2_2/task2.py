@@ -25,7 +25,7 @@ class TextFile:
         try:
             f = open(self.name_file, 'r')
             for line in f:
-                self.words += len(line.split())
+                self.words += len(list(filter(None, re.split(r'\w', line))))
             f.close()
             return self.words
         except IOError:
@@ -35,8 +35,8 @@ class TextFile:
         """"A function that counts the number of sentences"""
         try:
             f = open(self.name_file, 'r')
-            data = f.read()
-            self.sentences = len(re.split('\. |! |\? |\... ', data))
+            for line in f:
+                self.sentences += len(list(filter(None, re.split(r'\b[\.?!][A-Z\s+]', line))))
             f.close()
             return self.sentences
         except IOError:
@@ -47,4 +47,3 @@ x = TextFile("file.txt")
 print(x.count_char())
 print(x.count_word())
 print(x.count_sentence())
-

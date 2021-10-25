@@ -31,14 +31,6 @@ class Student:
         :param:grades: int[]
             grades student
         """
-        if not isinstance(surname, str) or not isinstance(name, str) or not isinstance(num_book, int):
-            raise TypeError("Wrong type of surname, name or book")
-        if not all([isinstance(grade, int) for grade in grades]):
-            raise TypeError("Wrong type of grades")
-        if not surname.isalpha() or not name.isalpha() or num_book <= 0:
-            raise ValueError("Wrong value of surname, name or book")
-        if not all([0 < grade < 13 for grade in grades]):
-            raise ValueError("Wrong value of grades")
         self.name = name
         self.surname = surname
         self.num_book = num_book
@@ -57,6 +49,113 @@ class Student:
         Used to sort a list that includes instances of a class
         """
         return self.average_score() > other.average_score()
+
+    def __str__(self):
+        """
+        Returns class elements
+        """
+        return f'{self.name} {self.surname} {self.average_score()}\n'
+
+    def add_grade(self, grade):
+        """
+        Add new grade
+        :param grade:
+            new grade
+        :return:
+        """
+        if not isinstance(grade, int):
+            raise TypeError("Wrong type!")
+        if not 0 < grade < 13:
+            raise ValueError("Wrong value!")
+        self.grades.append(grade)
+
+    @property
+    def name(self):
+        """
+        Getter name
+        :return:
+        """
+        return self.__name
+
+    @property
+    def surname(self):
+        """
+        Getter surname
+        :return:
+        """
+        return self.__surname
+
+    @property
+    def grades(self):
+        """
+        Getter grades
+        :return:
+        """
+        return self.__grades
+
+    @property
+    def num_book(self):
+        """
+        Getter num_book
+        :return:
+        """
+        return self.__num_book
+
+    @name.setter
+    def name(self, value):
+        """
+        Setter name
+        :param value:
+            New name
+        :return:
+        """
+        if not isinstance(value, str):
+            raise TypeError("Wrong type!")
+        if not value.isalpha():
+            raise ValueError("Wrong value of name")
+        self.__name = value
+
+    @surname.setter
+    def surname(self, value):
+        """
+        Setter surname
+        :param value:
+            new surname
+        :return:
+        """
+        if not isinstance(value, str):
+            raise TypeError("Wrong type!")
+        if not value.isalpha():
+            raise ValueError("Wrong value of surname")
+        self.__surname = value
+
+    @grades.setter
+    def grades(self, value):
+        """
+        Setter grades
+        :param value:
+            new grades
+        :return:
+        """
+        if not all([isinstance(grade, int) for grade in value]):
+            raise TypeError("Wrong type of grades")
+        if not all([0 < grade < 13 for grade in value]):
+            raise ValueError("Wrong value of grades")
+        self.__grades = value
+
+    @num_book.setter
+    def num_book(self, value):
+        """
+        Setter num_book
+        :param value:
+            new num_book
+        :return:
+        """
+        if not(isinstance(value, int)):
+            raise TypeError("Wrong type of num_book")
+        if not value > 0:
+            raise ValueError("Wrong value of num_book")
+        self.__num_book = value
 
 
 class Group:
@@ -86,15 +185,33 @@ class Group:
         :param:student: list
             sequence of data about each student group
         """
+        self.students = students
+
+    @property
+    def students(self):
+        """
+        Getter students
+        :return:
+        """
+        return self.__students
+
+    @students.setter
+    def students(self, students):
+        """
+        Setter students
+        :param students:
+            new students
+        :return:
+        """
         if not all([isinstance(student, Student) for student in students]):
             raise TypeError("Wrong type of students")
         if len(students) > 20:
-            raise ValueError
-        self.surnames_names = []
-        if not all([self.check(student) for student in students]):
-            raise ValueError
-
-        self.students = students
+            raise ValueError("A lot of students")
+        for i in range(len(students)):
+            if any(students[i].surname == st.surname for st in students[i+1:])\
+                    and any(students[i].name == st.name for st in students[i+1:]):
+                raise ValueError("There are students with the same name and surname")
+        self.__students = students
 
     def add_student(self, student):
         """
@@ -105,8 +222,11 @@ class Group:
         """
         if not isinstance(student, Student):
             raise TypeError("Wrong type of students")
-        if not self.check(student):
-            raise ValueError
+        if len(self.students) == 20:
+            raise ValueError("A lot of students")
+        for st in self.students:
+            if student.name == st.name and student.surname == student.surname:
+                raise ValueError("There are students with the same name and surname")
         self.students.append(student)
 
     def del_student(self, student):
@@ -118,37 +238,28 @@ class Group:
         """
         if not isinstance(student, Student):
             raise TypeError("Wrong type of students")
+        if student not in self.students:
+            raise ValueError
         self.students.remove(student)
 
-    def check(self, student):
-        """
-        Checks if there is a student with the same name and surname in the class
-        :param student: Student
-            whose student needs to be removed from the group
-        :return: (True or False)
-        """
-        st = student.surname+student.name
-        if st in self.surnames_names:
-            return False
-        else:
-            self.surnames_names.append(st)
-        return True
-
-    def func(self):
+    @property
+    def top_5(self):
         """
         Returns 5 students with the best grade point average
-        :return: average_sc: str[]
-            array of 5 students an array of 5 students with the best score
+        :return: students
         """
-        average_sc = []
-        self.students = sorted(self.students)
-        for i in range(5):
-            average_sc.append(
-                f'{self.students[i].name} {self.students[i].surname} {self.students[i].average_score()}\n')
-        return "".join(average_sc)
+        self.students = sorted(self.__students)
+        return self.students[:5]
+
+    def __str__(self):
+        """
+        Returns class elements
+        """
+        return "".join(list(map(str, list(self.top_5))))
 
 
 st1 = Student("Karaim", "Ivanna", 343, [12, 12, 12])
+st1.add_grade(11)
 st2 = Student("Lys", "Viktoria", 564, [12, 9, 4])
 st3 = Student("Krupko", "Diana", 345, [10, 12, 12])
 st4 = Student("Omelchenko", "Iryna", 305, [10, 12, 12])
@@ -161,4 +272,4 @@ st10 = Student("Valla", "Marta", 56, [3, 8, 6])
 st11 = Student("Datsiuk", "Lilya", 32355, [5, 8, 11])
 Group = Group([st1, st2, st3, st4, st5, st6, st7, st8, st9])
 Group.add_student(st10)
-print(Group.func())
+print(Group)

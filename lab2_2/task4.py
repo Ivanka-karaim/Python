@@ -37,6 +37,30 @@ class Node:
         self.code = code
         self.price = price
 
+    @property
+    def code(self):
+        return self.__code
+
+    @code.setter
+    def code(self, code):
+        if not isinstance(code, int):
+            raise TypeError("Wrong type of code ")
+        if code <= 0:
+            raise ValueError("Wrong value of code(code>0)")
+        self.__code = code
+
+    @property
+    def price(self):
+        return self.__price
+
+    @price.setter
+    def price(self,price):
+        if not isinstance(price, int):
+            raise TypeError("Wrong type of code ")
+        if price <= 0:
+            raise ValueError("Wrong value of code(code>0)")
+        self.__price= price
+
     def insert(self, code, price):
         """
         Adds new nodes to the tree
@@ -51,12 +75,12 @@ class Node:
             if code == self.code:
                 raise ValueError("Such a code already exists")
             if code < self.code:
-                if self.left is None:
+                if not self.left:
                     self.left = Node(code, price)
                 else:
                     self.left.insert(code, price)
             elif code > self.code:
-                if self.right is None:
+                if not self.right:
                     self.right = Node(code, price)
                 else:
                     self.right.insert(code, price)
@@ -72,12 +96,12 @@ class Node:
               the price of one product by code
         """
         if code < self.code:
-            if self.left is None:
+            if not self.left:
                 return None
             else:
                 return self.left.return_price(code)
         elif code > self.code:
-            if self.right is None:
+            if not self.right:
                 return None
             else:
                 return self.right.return_price(code)

@@ -1,13 +1,44 @@
 class Product:
     """"A class describing the product"""
     def __init__(self, description, dimensions, price):
-        if not isinstance(description, str) or not isinstance(dimensions, int) or not isinstance(price, (float, int)):
-            raise TypeError("Wrong type of description, dimensions or prices")
-        if dimensions <= 0 or price <= 0:
-            raise ValueError("Incorrectly entered dimensions or price")
+
         self.description = description
         self.dimensions = dimensions
         self.price = price
+
+    @property
+    def description(self):
+        return self.__description
+
+    @property
+    def dimensions(self):
+        return self.__dimensions
+
+    @property
+    def price(self):
+        return self.__price
+
+    @description.setter
+    def description(self, description):
+        if not isinstance(description, str):
+            raise TypeError("Wrong type of description")
+        self.__description = description
+
+    @dimensions.setter
+    def dimensions(self, dimensions):
+        if not isinstance(dimensions, int):
+            raise TypeError("Wrong type of dimensions")
+        if dimensions <= 0:
+            raise ValueError("Incorrectly entered dimensions")
+        self.__dimensions = dimensions
+
+    @price.setter
+    def price(self, price):
+        if not isinstance(price, (float, int)):
+            raise TypeError("Wrong type of prices")
+        if price <= 0:
+            raise ValueError("Incorrectly entered price")
+        self.__price = price
 
     def __str__(self):
         pass
@@ -16,15 +47,45 @@ class Product:
 class Customer:
     """"A class describing the customer"""
     def __init__(self, surname, name, phone):
-        if not isinstance(surname, str) or not isinstance(name, str) or not isinstance(phone, str):
-            raise TypeError("Wrong type of surname or name or phone")
-        if not phone.isdigit() or len(phone) != 10:
-            raise ValueError("The phone number was entered incorrectly")
-        if not surname.isalpha() or not name.isalpha():
-            raise ValueError("Wrong value of surname or name")
         self.surname = surname
         self.name = name
         self.phone = phone
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def surname(self):
+        return self.__surname
+
+    @property
+    def phone(self):
+        return self.__phone
+
+    @name.setter
+    def name(self,name):
+        if not isinstance(name, str):
+            raise TypeError("Wrong type of name ")
+        if not name.isalpha():
+            raise ValueError("Wrong value of name")
+        self.__name = name
+
+    @surname.setter
+    def surname(self, surname):
+        if not isinstance(surname, str):
+            raise TypeError("Wrong type of surname ")
+        if not surname.isalpha():
+            raise ValueError("Wrong value of surname")
+        self.__surname = surname
+
+    @phone.setter
+    def phone(self, phone):
+        if not isinstance(phone, str):
+            raise TypeError("Wrong type of phone ")
+        if not phone.isdigit() or len(phone) != 10:
+            raise ValueError("The phone number was entered incorrectly")
+        self.__phone = phone
 
     def __str__(self):
         """"A function that returns customer data"""
@@ -35,12 +96,28 @@ class Order:
     """A class that describes an Order."""
 
     def __init__(self, customer, products):
-        if not all([isinstance(product, Product) for product in products]):
-            raise TypeError("Wrong type of product")
-        if not isinstance(customer, Customer):
-            raise TypeError
         self.customer = customer
         self.products = products
+
+    @property
+    def customer(self):
+        return self.__customer
+
+    @property
+    def products(self):
+        return self.__products
+
+    @customer.setter
+    def customer(self, customer):
+        if not isinstance(customer, Customer):
+            raise TypeError("Wrong type of customer")
+        self.__customer = customer
+
+    @products.setter
+    def products(self, products):
+        if not all([isinstance(product, Product) for product in products]):
+            raise TypeError("Wrong type of product")
+        self.__products = products
 
     def add_product(self, new_product):
         if not isinstance(new_product, Product):
