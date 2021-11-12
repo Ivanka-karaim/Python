@@ -185,6 +185,9 @@ class PizzaMonday(PizzaOfTheDay):
     def __init__(self, day, pizza_of_a_day, price, ingredients, toppings=None):
         super().__init__(day, pizza_of_a_day, price, ingredients, toppings)
 
+    def __str__(self):
+        return f'Day: Monday\n {super().__str__()}'
+
 
 class PizzaTuesday(PizzaOfTheDay):
     """
@@ -192,6 +195,9 @@ class PizzaTuesday(PizzaOfTheDay):
     """
     def __init__(self, day, pizza_of_a_day, price, ingredients, toppings=None):
         super().__init__(day, pizza_of_a_day, price, ingredients, toppings)
+
+    def __str__(self):
+        return f'Day: Tuesday\n {super().__str__()}'
 
 
 class PizzaWednesday(PizzaOfTheDay):
@@ -201,6 +207,9 @@ class PizzaWednesday(PizzaOfTheDay):
     def __init__(self, day, pizza_of_a_day, price, ingredients, toppings=None):
         super().__init__(day, pizza_of_a_day, price, ingredients, toppings)
 
+    def __str__(self):
+        return f'Day: Wednesday\n {super().__str__()}'
+
 
 class PizzaThursday(PizzaOfTheDay):
     """
@@ -208,6 +217,9 @@ class PizzaThursday(PizzaOfTheDay):
     """
     def __init__(self, day, pizza_of_a_day, price, ingredients, toppings=None):
         super().__init__(day, pizza_of_a_day, price, ingredients, toppings)
+
+    def __str__(self):
+        return f'Day: Thursday\n {super().__str__()}'
 
 
 class PizzaFriday(PizzaOfTheDay):
@@ -217,6 +229,9 @@ class PizzaFriday(PizzaOfTheDay):
     def __init__(self, day, pizza_of_a_day, price, ingredients, toppings=None):
         super().__init__(day, pizza_of_a_day, price, ingredients, toppings)
 
+    def __str__(self):
+        return f'Day: Friday\n {super().__str__()}'
+
 
 class PizzaSaturday(PizzaOfTheDay):
     """
@@ -225,6 +240,9 @@ class PizzaSaturday(PizzaOfTheDay):
     def __init__(self, day, pizza_of_a_day, price, ingredients, toppings=None):
         super().__init__(day, pizza_of_a_day, price, ingredients, toppings)
 
+    def __str__(self):
+        return f'Day: Saturday\n {super().__str__()}'
+
 
 class PizzaSunday(PizzaOfTheDay):
     """
@@ -232,6 +250,9 @@ class PizzaSunday(PizzaOfTheDay):
     """
     def __init__(self, day, pizza_of_a_day, price, ingredients, toppings=None):
         super().__init__(day, pizza_of_a_day, price, ingredients, toppings)
+
+    def __str__(self):
+        return f'Day: Sunday\n {super().__str__()}'
 
 
 class Order:
@@ -338,7 +359,7 @@ class Order:
             json.dump(orders, file, indent=4)
 
     def __str__(self):
-        return f'Customer: {self.customer} \nPizza: {self.all_pizzas()}To pay: {self.order_amount}'
+        return f'Customer: {self.customer} \nPizza:\n{self.all_pizzas()}To pay: {self.order_amount}'
 
 
 def pizza_of_the_day(day):
@@ -397,5 +418,7 @@ try:
             print(x)
             x.write_date()
             exit(1)
-except  FileNotFoundError:
+        else:
+            print("Incorrectly data")
+except FileNotFoundError:
     print("Error")

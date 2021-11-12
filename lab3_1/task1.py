@@ -272,6 +272,8 @@ try:
         my_ticket = get_ticket(str(idd))
         if my_ticket:
             print(my_ticket)
+    else:
+        print("Incorrectly data")
 except (ValueError, FileNotFoundError):
     print("Incorrectly entered data")
 
