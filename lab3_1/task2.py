@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-
+from const import *
 
 def serialization():
     data = [{"day": "Monday", "name": "Margarita", "price": 100,
@@ -312,7 +312,7 @@ class Order:
             price = price + pizza_day.prices()
         return price
 
-    def add(self, value, number=1):
+    def add(self, value, number=const_number):
         """
         Adds ingredients
         :param value:
@@ -356,7 +356,7 @@ class Order:
             orders.append({"customer": self.customer, "day": self.pizzas[0].day,
                            "pizza": self.pizzas[0].name, "price": self.order_amount})
         with open("order.json", 'w') as file:
-            json.dump(orders, file, indent=4)
+            json.dump(orders, file, indent=indent)
 
     def __str__(self):
         return f'Customer: {self.customer} \nPizza:\n{self.all_pizzas()}To pay: {self.order_amount}'

@@ -1,3 +1,10 @@
 const_advance = 0.6
 const_late = 1.1
 const_student = 0.5
+const_len_code = 4
+const_day1 = 60
+const_day2 = 10
+const_day3 = 0
+indent = 4
+const_number = 1
+const = 0

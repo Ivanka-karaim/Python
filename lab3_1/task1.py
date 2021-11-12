@@ -181,7 +181,7 @@ def buy_ticket(code, seat, ind=None):
         student indicator
     :return: the number of the purchased ticket
     """
-    if len(str(code)) != 4:
+    if len(str(code)) != const_len_code:
         print("The event code was entered incorrectly")
         return None
     with open("ticket_already_bought.json", 'r') as read_file:
@@ -205,20 +205,20 @@ def buy_ticket(code, seat, ind=None):
     else:
         date = datetime.strptime(data["date"], "%y-%m-%d")
         time = date - datetime.today()
-        if time > timedelta(days=60):
+        if time > timedelta(days=const_day1):
             ticket = AdvanceTicket(str(code)+str(seat), data["name"], data["price"], seat, data["date"])
             purchased_tickets.append(ticket.dict())
-        elif time < timedelta(days=10):
+        elif time < timedelta(days=const_day2):
             ticket = LateTicket(str(code)+str(seat), data["name"], data["price"], seat, data["date"])
             purchased_tickets.append(ticket.dict())
-        elif time < timedelta(days=0):
+        elif time < timedelta(days=const_day3):
             print("This event has already taken place")
             return None
         else:
             ticket = BaseTicket(str(code)+str(seat), data["name"], data["price"], seat, data["date"])
             purchased_tickets.append(ticket.dict())
     with open("ticket_already_bought.json", 'w') as write_file:
-        json.dump(purchased_tickets, write_file, indent=4)
+        json.dump(purchased_tickets, write_file, indent=indent)
     return str(code)+str(seat)
 
 
