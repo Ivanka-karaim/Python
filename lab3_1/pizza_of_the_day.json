@@ -1,0 +1,88 @@
+[
+    {
+        "day": "Monday",
+        "name": "Margarita",
+        "price": 100,
+        "ingredients": [
+            "tomato sauce",
+            "cheese",
+            "tomatoes",
+            "basil"
+        ]
+    },
+    {
+        "day": "Tuesday",
+        "name": "Karbonara",
+        "price": 120,
+        "ingredients": [
+            "cream sauce",
+            "cheese",
+            "bacon",
+            "eggs",
+            "onions",
+            "garlic",
+            "basil"
+        ]
+    },
+    {
+        "day": "Wednesday",
+        "name": "Four cheeses",
+        "price": 110,
+        "ingredients": [
+            "mozzarella",
+            "parmesan",
+            "dor blue",
+            "cheddar"
+        ]
+    },
+    {
+        "day": "Thursday",
+        "name": "Hawaiian",
+        "price": 110,
+        "ingredients": [
+            "cheese",
+            "tomato base",
+            "bacon",
+            "pineapple"
+        ]
+    },
+    {
+        "day": "Friday",
+        "name": "Bavarian",
+        "price": 130,
+        "ingredients": [
+            "bacon",
+            "hunting sausages",
+            "salami",
+            "ham",
+            "sauce"
+        ]
+    },
+    {
+        "day": "Saturday",
+        "name": "Pepperoni",
+        "price": 100,
+        "ingredients": [
+            "mozzarella",
+            "russian cheese",
+            "pepperoni",
+            "tomatoes",
+            "basil",
+            "tomato sauce",
+            "chili"
+        ]
+    },
+    {
+        "day": "Sunday",
+        "name": "Mexican",
+        "price": 120,
+        "ingredients": [
+            "salami",
+            "mushrooms",
+            "tomatoes",
+            "sauce",
+            "cheese",
+            "parsley"
+        ]
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "customer": "Ivanna",
+        "day": "Thursday",
+        "pizza": "Hawaiian",
+        "price": 340
+    },
+    {
+        "customer": "Ivanna",
+        "day": "Friday",
+        "pizza": "Bavarian",
+        "price": 400
+    },
+    {
+        "customer": "Ivanna",
+        "day": "Friday",
+        "pizza": "Bavarian",
+        "price": 415
+    },
+    {
+        "customer": "Ivanna",
+        "day": "Friday",
+        "pizza": "Bavarian",
+        "price": 285
+    }
+]
