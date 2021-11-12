@@ -1,6 +1,8 @@
 import json
 from datetime import datetime, timedelta
-
+const_advance = 0.6
+const_late = 1.1
+const_student = 0.5
 
 class BaseTicket:
     """
@@ -114,7 +116,7 @@ class AdvanceTicket(BaseTicket):
     The class describes advance ticket
     """
     def __init__(self, num_ticket, name, price, seat, date):
-        super().__init__(num_ticket, name, price*0.6, seat, date)
+        super().__init__(num_ticket, name, price*const_advance, seat, date)
 
     def __str__(self):
         return f'Advance ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
@@ -134,7 +136,7 @@ class LateTicket(BaseTicket):
     The class describes late ticket
     """
     def __init__(self, num_ticket, name, price, seat, date):
-        super().__init__(num_ticket, name, price*1.1, seat, date)
+        super().__init__(num_ticket, name, price*const_late, seat, date)
 
     def __str__(self):
         return f'Late ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
@@ -154,7 +156,7 @@ class StudentTicket(BaseTicket):
     The class describes student ticket
     """
     def __init__(self, num_ticket, name, price, seat, date):
-        super().__init__(num_ticket, name, price*0.5, seat, date)
+        super().__init__(num_ticket, name, price*const_student, seat, date)
 
     def __str__(self):
         return f'Student ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
