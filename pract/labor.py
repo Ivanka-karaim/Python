@@ -1,11 +1,14 @@
 import random
 import os
 import timeit
-# file = open("files.txt", "w")
-# while os.path.getsize("files.txt") <= 50000000:
-#     file.write(str(random.randint(1, 1000)) + "\n")
-# print(os.path.getsize("files.txt"))
-# file.close()
+# try:
+#     file = open("files.txt", "w")
+#     while os.path.getsize("files.txt") <= 50000000:
+#         file.write(str(random.randint(1, 1000)) + "\n")
+#     print(os.path.getsize("files.txt"))
+#     file.close()
+# except FileNotFoundError:
+#     print("Error")
 s = """
 with open("files.txt", "r") as file:
     x = file.readlines()
