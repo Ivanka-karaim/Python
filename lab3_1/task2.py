@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 from const import *
 
+
 def serialization():
     data = [{"day": "Monday", "name": "Margarita", "price": 100,
              "ingredients": ["tomato sauce", "cheese", "tomatoes", "basil"]},
@@ -369,24 +370,21 @@ def pizza_of_the_day(day):
         today
     :return: pizza of the day
     """
+    pizza_dict = {
+
+        "Monday": PizzaMonday,
+        "Tuesday": PizzaTuesday,
+        "Wednesday": PizzaWednesday,
+        'Thursday': PizzaThursday,
+        "Friday": PizzaFriday,
+        "Saturday": PizzaSaturday,
+        "Sunday": PizzaSunday
+    }
     with open("pizza_of_the_day.json", 'r') as file:
         pizza_days = json.load(file)
     for pizza_day in pizza_days:
         if pizza_day["day"] == day:
-            if day == "Monday":
-                return PizzaMonday(pizza_day["day"], pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if day == "Tuesday":
-                return PizzaTuesday(pizza_day["day"], pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if day == "Wednesday":
-                return PizzaWednesday(pizza_day["day"], pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if day == "Thursday":
-                return PizzaThursday(pizza_day["day"], pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if day == "Friday":
-                return PizzaFriday(pizza_day["day"], pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if day == "Saturday":
-                return PizzaSaturday(pizza_day["day"], pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
-            if day == "Sunday":
-                return PizzaSunday(pizza_day["day"], pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
+            return pizza_dict[day](pizza_day["day"], pizza_day["name"], pizza_day["price"], pizza_day["ingredients"])
     print("Incorrect data")
     return None
 
