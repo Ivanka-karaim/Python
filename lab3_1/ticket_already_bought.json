@@ -22,5 +22,13 @@
         "seat": 6,
         "date": "21-11-14",
         "type": "LateTicket"
+    },
+    {
+        "id": "12347",
+        "name": "",
+        "price": 100.0,
+        "seat": 7,
+        "date": "21-11-14",
+        "type": "StudentTicket"
     }
 ]
