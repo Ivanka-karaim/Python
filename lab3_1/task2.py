@@ -410,15 +410,15 @@ try:
             for i in range(ind_ingredients):
                 mass.append(str(input()))
             x.add(mass, ind_pizza)
-        if mod == 2:
+        elif mod == 2:
             ingredient = str(input("Enter the ingredient you want to remove: "))
             ind_pizza = int(input("Which pizza do you want to dell ingredients to: "))
             x.dell(ingredient, ind_pizza)
-        if mod == 3:
+        elif mod == 3:
             print(x)
             x.write_date()
             exit(1)
         else:
             print("Incorrectly data")
-except FileNotFoundError:
+except (ValueError, FileNotFoundError):
     print("Error")

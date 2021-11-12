@@ -267,7 +267,7 @@ try:
         tick = buy_ticket(code, seat, student)
         if tick:
             print("Your id: " + tick)
-    if mod == 2:
+    elif mod == 2:
         idd = int(input("Enter id ticket: "))
         my_ticket = get_ticket(str(idd))
         if my_ticket:
@@ -275,6 +275,6 @@ try:
     else:
         print("Incorrectly data")
 except (ValueError, FileNotFoundError):
-    print("Incorrectly entered data")
+    print("Error ")
 
 
