@@ -4,6 +4,7 @@ const_advance = 0.6
 const_late = 1.1
 const_student = 0.5
 
+
 class BaseTicket:
     """
     Base Ticket
@@ -243,11 +244,11 @@ def get_ticket(number):
     if gets["type"] == "BaseTicket":
         return BaseTicket(gets["id"], gets["name"], gets["price"], gets["seat"], gets["date"])
     if gets["type"] == "LateTicket":
-        return LateTicket(gets["id"], gets["name"], gets["price"]/1.1, gets["seat"], gets["date"])
+        return LateTicket(gets["id"], gets["name"], gets["price"]/const_late, gets["seat"], gets["date"])
     if gets["type"] == "StudentTicket":
-        return StudentTicket(gets["id"], gets["name"], gets["price"]/0.5, gets["seat"], gets["date"])
+        return StudentTicket(gets["id"], gets["name"], gets["price"]/const_student, gets["seat"], gets["date"])
     if gets["type"] == "AdvanceTicket":
-        return AdvanceTicket(gets["id"], gets["name"], gets["price"]/0.6, gets["seat"], gets["date"])
+        return AdvanceTicket(gets["id"], gets["name"], gets["price"]/const_advance, gets["seat"], gets["date"])
 
 
 def display_all_events():
