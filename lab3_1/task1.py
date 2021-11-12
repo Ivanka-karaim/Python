@@ -101,7 +101,7 @@ class BaseTicket:
         return f'Ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
                f'Date: {self.date} Code: {self.num_ticket}'
 
-    def dict(self):
+    def to_dict(self):
         """
         Dict base ticket
         :return: dict describing the base ticket
@@ -115,13 +115,13 @@ class AdvanceTicket(BaseTicket):
     The class describes advance ticket
     """
     def __init__(self, num_ticket, name, price, seat, date):
-        super().__init__(num_ticket, name, price*const_advance, seat, date)
+        super().__init__(num_ticket, name, price, seat, date)
 
     def __str__(self):
         return f'Advance ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
                f'Date: {self.date} Code: {self.num_ticket}'
 
-    def dict(self):
+    def to_dict(self):
         """
         Dict advance ticket
         :return: dict describing the advance ticket
@@ -141,7 +141,8 @@ class LateTicket(BaseTicket):
         return f'Late ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
                f'Date: {self.date} Code: {self.num_ticket}'
 
-    def dict(self):
+
+    def to_dict(self):
         """
         Dict late ticket
         :return: dict describing the late ticket
@@ -161,7 +162,7 @@ class StudentTicket(BaseTicket):
         return f'Student ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
                f'Date: {self.date} Code: {self.num_ticket}'
 
-    def dict(self):
+    def to_dict(self):
         """
         Dict student ticket
         :return: dict describing the student ticket
@@ -201,22 +202,22 @@ def buy_ticket(code, seat, ind=None):
         return None
     if ind:
         ticket = StudentTicket(str(code)+str(seat), data["name"], data["price"], seat, data["date"])
-        purchased_tickets.append(ticket.dict())
+        purchased_tickets.append(ticket.to_dict())
     else:
         date = datetime.strptime(data["date"], "%y-%m-%d")
         time = date - datetime.today()
         if time > timedelta(days=const_day1):
             ticket = AdvanceTicket(str(code)+str(seat), data["name"], data["price"], seat, data["date"])
-            purchased_tickets.append(ticket.dict())
+            purchased_tickets.append(ticket.to_dict())
         elif time < timedelta(days=const_day2):
             ticket = LateTicket(str(code)+str(seat), data["name"], data["price"], seat, data["date"])
-            purchased_tickets.append(ticket.dict())
+            purchased_tickets.append(ticket.to_dict())
         elif time < timedelta(days=const_day3):
             print("This event has already taken place")
             return None
         else:
             ticket = BaseTicket(str(code)+str(seat), data["name"], data["price"], seat, data["date"])
-            purchased_tickets.append(ticket.dict())
+            purchased_tickets.append(ticket.to_dict())
     with open("ticket_already_bought.json", 'w') as write_file:
         json.dump(purchased_tickets, write_file, indent=indent)
     return str(code)+str(seat)
