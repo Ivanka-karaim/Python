@@ -52,5 +52,11 @@
         "day": "Friday",
         "pizza": "Bavarian",
         "price": 260
+    },
+    {
+        "customer": "Ivanna",
+        "day": "Thursday",
+        "pizza": "Hawaiian",
+        "price": 115
     }
 ]

@@ -121,12 +121,16 @@ class AdvanceTicket(BaseTicket):
         return f'Advance ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
                f'Date: {self.date} Code: {self.num_ticket}'
 
+    @property
+    def get_price(self):
+        return super().price*const_advance
+
     def to_dict(self):
         """
         Dict advance ticket
         :return: dict describing the advance ticket
         """
-        return {"id": self.num_ticket, "name": self.name, "price": self.price, "seat": self.seat, "date": self.date,
+        return {"id": self.num_ticket, "name": self.name, "price": self.get_price, "seat": self.seat, "date": self.date,
                 "type": "AdvanceTicket"}
 
 
@@ -135,19 +139,22 @@ class LateTicket(BaseTicket):
     The class describes late ticket
     """
     def __init__(self, num_ticket, name, price, seat, date):
-        super().__init__(num_ticket, name, price*const_late, seat, date)
+        super().__init__(num_ticket, name, price, seat, date)
+
+    @property
+    def get_price(self):
+        return super().price*const_late
 
     def __str__(self):
         return f'Late ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
                f'Date: {self.date} Code: {self.num_ticket}'
-
 
     def to_dict(self):
         """
         Dict late ticket
         :return: dict describing the late ticket
         """
-        return {"id": self.num_ticket, "name": self.name, "price": self.price, "seat": self.seat, "date": self.date,
+        return {"id": self.num_ticket, "name": self.name, "price": self.get_price, "seat": self.seat, "date": self.date,
                 "type": "LateTicket"}
 
 
@@ -158,6 +165,10 @@ class StudentTicket(BaseTicket):
     def __init__(self, num_ticket, name, price, seat, date):
         super().__init__(num_ticket, name, price*const_student, seat, date)
 
+    @property
+    def get_price(self):
+        return super().price*const_student
+
     def __str__(self):
         return f'Student ticket\nInvention:{self.name} Price: {self.price} Seat: {self.seat}\n' \
                f'Date: {self.date} Code: {self.num_ticket}'
@@ -167,7 +178,7 @@ class StudentTicket(BaseTicket):
         Dict student ticket
         :return: dict describing the student ticket
         """
-        return {"id": self.num_ticket, "name": self.name, "price": self.price, "seat": self.seat, "date": self.date,
+        return {"id": self.num_ticket, "name": self.name, "price": self.get_price, "seat": self.seat, "date": self.date,
                 "type": "StudentTicket"}
 
 
@@ -243,11 +254,11 @@ def get_ticket(number):
     if gets["type"] == "BaseTicket":
         return BaseTicket(gets["id"], gets["name"], gets["price"], gets["seat"], gets["date"])
     if gets["type"] == "LateTicket":
-        return LateTicket(gets["id"], gets["name"], gets["price"]/const_late, gets["seat"], gets["date"])
+        return LateTicket(gets["id"], gets["name"], gets["price"], gets["seat"], gets["date"])
     if gets["type"] == "StudentTicket":
-        return StudentTicket(gets["id"], gets["name"], gets["price"]/const_student, gets["seat"], gets["date"])
+        return StudentTicket(gets["id"], gets["name"], gets["price"], gets["seat"], gets["date"])
     if gets["type"] == "AdvanceTicket":
-        return AdvanceTicket(gets["id"], gets["name"], gets["price"]/const_advance, gets["seat"], gets["date"])
+        return AdvanceTicket(gets["id"], gets["name"], gets["price"], gets["seat"], gets["date"])
 
 
 def display_all_events():

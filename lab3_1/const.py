@@ -8,3 +8,6 @@ const_day3 = 0
 indent = 4
 const_number = 1
 const = 0
+mod1 = 1
+mod2 = 2
+mod3 = 3

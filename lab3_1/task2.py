@@ -3,31 +3,6 @@ from datetime import datetime
 from const import *
 
 
-def serialization():
-    data = [{"day": "Monday", "name": "Margarita", "price": 100,
-             "ingredients": ["tomato sauce", "cheese", "tomatoes", "basil"]},
-            {"day": "Tuesday", "name": "Karbonara", "price": 120, "ingredients":
-                ["cream sauce", "cheese", "bacon", "eggs", "onions", "garlic", "basil"]},
-            {"day": "Wednesday", "name": "Four cheeses",
-             "price": 110, "ingredients": ["mozzarella", "parmesan", "dor blue", "cheddar"]},
-            {"day": "Thursday", "name": "Hawaiian",
-             "price": 110, "ingredients": ["cheese", "tomato base", "bacon", "pineapple"]},
-            {"day": "Friday", "name": "Bavarian", "price": 130,
-             "ingredients": ["bacon", "hunting sausages", "salami", "ham", "sauce"]},
-            {"day": "Saturday", "name": "Pepperoni",
-             "price": 100,
-             "ingredients": ["mozzarella", "russian cheese", "pepperoni", "tomatoes", "basil", "tomato sauce",
-                             "chili"]},
-            {"day": "Sunday", "name": "Mexican", "price": 120,
-             "ingredients": ["salami", "mushrooms", "tomatoes", "sauce", "cheese", "parsley"]
-             }]
-    with open("pizza_of_the_day.json", 'w') as f:
-        json.dump(data, f, indent=4)
-    data1 = {"mustard": 10, "cucumbers": 15, "corn": 5, "french fries": 6, "olives": 20, "mushrooms": 17}
-    with open("pizza_topings.json", 'w') as file:
-        json.dump(data1, file, indent=4)
-
-
 class PizzaOfTheDay:
     """
     Basic pizza class
@@ -105,7 +80,7 @@ class PizzaOfTheDay:
     def price(self, value):
         if not isinstance(value, (int, float)):
             raise TypeError
-        if value < 0:
+        if value < const:
             raise ValueError
         self.__price = value
 
@@ -138,7 +113,7 @@ class PizzaOfTheDay:
         Price pizza
         :return: returns a whole pizza with extra ingredients
         """
-        price = 0
+        price = const
         with open("pizza_topings.json", 'r') as file:
             topp = json.load(file)
         for top in self.toppings:
@@ -308,7 +283,7 @@ class Order:
 
     @property
     def order_amount(self):
-        price = 0
+        price = const
         for pizza_day in self.pizzas:
             price = price + pizza_day.prices()
         return price
@@ -323,11 +298,11 @@ class Order:
         """
         if not isinstance(number, int):
             raise TypeError
-        if number > len(self.pizzas) or number < 0:
+        if number > len(self.pizzas) or number < const:
             raise ValueError
-        self.pizzas[number - 1].add_ingredient(value)
+        self.pizzas[number - const_number].add_ingredient(value)
 
-    def dell(self, value, number=1):
+    def dell(self, value, number=const_number):
         """
         Removes ingredient
         :param value:
@@ -337,9 +312,9 @@ class Order:
         """
         if not isinstance(number, int):
             raise TypeError
-        if number > len(self.pizzas) or number < 0:
+        if number > len(self.pizzas) or number < const:
             raise ValueError
-        self.pizzas[number - 1].del_ingredient(value)
+        self.pizzas[number - const_number].del_ingredient(value)
 
     def all_pizzas(self):
         """
@@ -354,8 +329,8 @@ class Order:
         """
         with open("order.json", 'r') as file:
             orders = json.load(file)
-            orders.append({"customer": self.customer, "day": self.pizzas[0].day,
-                           "pizza": self.pizzas[0].name, "price": self.order_amount})
+            orders.append({"customer": self.customer, "day": self.pizzas[const].day,
+                           "pizza": self.pizzas[const].name, "price": self.order_amount})
         with open("order.json", 'w') as file:
             json.dump(orders, file, indent=indent)
 
@@ -400,7 +375,7 @@ try:
     print(x.pizzas[0])
     while True:
         mod = int(input("1 - add ingredient\n2 - del_ingredient\n3 - exit\nEnter:"))
-        if mod == 1:
+        if mod == mod1:
             mass = []
             ind_ingredients = int(input("Enter the number of ingredients you want to add: "))
             ind_pizza = int(input("Which pizza do you want to add ingredients to: "))
@@ -408,11 +383,11 @@ try:
             for i in range(ind_ingredients):
                 mass.append(str(input()))
             x.add(mass, ind_pizza)
-        elif mod == 2:
+        elif mod == mod2:
             ingredient = str(input("Enter the ingredient you want to remove: "))
             ind_pizza = int(input("Which pizza do you want to dell ingredients to: "))
             x.dell(ingredient, ind_pizza)
-        elif mod == 3:
+        elif mod == mod3:
             print(x)
             x.write_date()
             exit(1)
