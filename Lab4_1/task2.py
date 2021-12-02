@@ -60,6 +60,18 @@ class Product:
             raise ValueError
         self.__price = value
 
+    def __iadd__(self, other):
+        if not isinstance(other, int):
+            raise TypeError
+        self.count += other
+        return self
+
+    def __isub__(self, other):
+        if not isinstance(other, int):
+            raise TypeError
+        self.count -= other
+        return self
+
     def __str__(self):
         return f'\nName: {self.name} Count: {self.count} Price: {self.price}'
 
