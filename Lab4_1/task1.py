@@ -70,29 +70,19 @@ class Rational:
         return Rational(self.numerator * other.denominator, self.denominator * other.numerator)
 
     def __eq__(self, other):
-        if self.numerator == other.numerator and self.denominator == other.denominator:
-            return True
-        return False
+        return (other.numerator, other.denominator) == (self.numerator, self.denominator)
 
     def __lt__(self, other):
-        if self.get() < other.get():
-            return True
-        return False
+        return self.get() < other.get()
 
     def __le__(self, other):
-        if self.get() <= other.get():
-            return True
-        return False
+        return self.get() <= other.get()
 
     def __gt__(self, other):
-        if self.get() > other.get():
-            return True
-        return False
+        return self.get() > other.get()
 
     def __ge__(self, other):
-        if self.get() >= other.get():
-            return True
-        return False
+        return self.get() >= other.get()
 
     def __iadd__(self, other):
         self.numerator = self.numerator * other.denominator + other.numerator * self.denominator
