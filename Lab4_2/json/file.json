@@ -1,0 +1,51 @@
+[
+  {
+    "type": "local",
+    "name": "Python_project",
+    "topics": ["historical", "foundations", "interaction with other languages"],
+    "teacher": "Angelyashek",
+    "connection": "0667236485"
+  },
+    {
+    "type": "local",
+    "name": "Java_project",
+    "topics": ["historical", "foundations", "interaction with other languages"],
+    "teacher": "Oskar",
+    "connection": "0667236485"
+  },
+    {
+    "type": "offsite",
+    "name": "Html_project",
+    "topics": ["historical", "foundations", "interaction with other languages"],
+    "teacher": "Angelyashek",
+    "connection"  : "Kalnysh"
+  },
+    {
+    "type": "local",
+    "name": "C++_project",
+    "topics": ["historical", "foundations", "interaction with other languages"],
+    "teacher": "Oskar",
+    "connection": "0667236485"
+  },
+    {
+    "type": "local",
+    "name": "C_project",
+    "topics": ["historical", "foundations", "interaction with other languages"],
+    "teacher": "Karaim",
+    "connection": "0667236485"
+  },
+    {
+    "type": "offsite",
+    "name": "C#_project",
+    "topics": ["historical", "foundations", "interaction with other languages"],
+    "teacher": "Datsiuk",
+    "connection"  : "Kalnysh"
+  },
+    {
+    "type": "offsite",
+    "name": "Php_project",
+    "topics": ["historical", "foundations", "interaction with other languages"],
+    "teacher": "Levchuk",
+    "connection"  : "Kalnysh"
+  }
+]
