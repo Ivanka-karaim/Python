@@ -128,10 +128,6 @@ class CoursesFactory:
             "local": LocalCourse,
             "offsite": OffsiteCourse
         }
-        courses_dict2 = {
-            "local": "phone_number",
-            "offsite": "address"
-        }
         with open("file.json", 'r') as file:
             courses = json.load(file)
         for course in courses:
