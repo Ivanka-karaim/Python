@@ -2,55 +2,14 @@ import sqlite3
 
 from Lab4_2.bd.interfaces import *
 
-
-class Course(ICourse):
-
-    def __init__(self, name, topics, teacher):
-        self.name = name
-        self.topics = topics
-        self.teacher = teacher
-
-    @property
-    def name(self):
-        return self.__name
-
-    @name.setter
-    def name(self, value):
-        if not isinstance(value, str):
-            raise TypeError
-        self.__name = value
-
-    @property
-    def teacher(self):
-        return self.__teacher
-
-    @teacher.setter
-    def teacher(self, value):
-        if not isinstance(value, ITeacher):
-            raise TypeError
-        self.__teacher = value
-
-    @property
-    def topics(self):
-        return self.__topics
-
-    @topics.setter
-    def topics(self, value):
-        if not all([isinstance(v, str) for v in value]):
-            raise TypeError
-        self.__topics = value
-
-    def __str__(self):
-        return f'{self.name} {self.teacher.name} {self.topics}'
-
-
 class Teacher(ITeacher):
-
-    def __init__(self, name):
+    """A class describing a teacher"""
+    def __init__(self, name:str):
         self.name = name
         self.courses = []
 
     def __iter__(self):
+        """Iterator class teacher"""
         return iter(self)
 
     @property
@@ -74,64 +33,114 @@ class Teacher(ITeacher):
         self.__courses = value
 
     def add(self, value):
+        """A function that adds the right course to the teacher"""
         if not isinstance(value, (ILocalCourse, IOffsiteCourse)):
             raise TypeError
         self.courses.append(value)
 
     def __str__(self):
+        """A function that outputs class data"""
         return f'{self.name} '
 
 
+class Course(ICourse):
+    """
+    Class course
+    """
+    def __init__(self, name: str, topics: list[str], teacher: ITeacher):
+        self.name = name
+        self.topics = topics
+        self.teacher = teacher
+
+    @property
+    def name(self) -> str:
+        return self.__name
+
+    @name.setter
+    def name(self, value: str):
+        if not isinstance(value, str):
+            raise TypeError
+        self.__name = value
+
+    @property
+    def teacher(self) -> ITeacher:
+        return self.__teacher
+
+    @teacher.setter
+    def teacher(self, value: ITeacher):
+        if not isinstance(value, ITeacher):
+            raise TypeError
+        self.__teacher = value
+
+    @property
+    def topics(self) -> list[str]:
+        return self.__topics
+
+    @topics.setter
+    def topics(self, value: list[str]):
+        if not all([isinstance(v, str) for v in value]):
+            raise TypeError
+        self.__topics = value
+
+    def __str__(self):
+        """A function that outputs class data"""
+        return f'{self.name} {self.teacher.name} {self.topics}'
+
+
 class LocalCourse(Course, ILocalCourse):
+    """A class that describes local courses"""
     def __init__(self, name,  topics, number_lab, teacher):
         super().__init__(name, topics, teacher)
         self.number_lab = number_lab
 
     @property
-    def number_lab(self):
+    def number_lab(self) -> int:
         return self.__number_lab
 
     @number_lab.setter
-    def number_lab(self, value):
+    def number_lab(self, value: int):
         if not isinstance(value, int):
             raise TypeError
         if value <= 0:
             raise ValueError
         self.__number_lab = value
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """A function that outputs class data"""
         return f'{self.name} Laboratoria: {self.number_lab} Teacher: {self.teacher}'
 
 
 class OffsiteCourse(Course, IOffsiteCourse):
-
+    """A class that describes offsite courses"""
     def __init__(self, name, topics, address, teacher):
         super().__init__(name, topics, teacher)
         self.address = address
 
     @property
-    def address(self):
+    def address(self) -> str:
         return self.__address
 
     @address.setter
-    def address(self, value):
+    def address(self, value: str):
         if not isinstance(value, str):
             raise TypeError
         self.__address = value
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """A function that outputs class data"""
         return f'{self.name} Address: {self.address} Teacher: {self.teacher}'
 
 
 class Factory(IFactory):
-
-    def __init__(self, name):
+    """Factory class for creating courses in the programming academy"""
+    def __init__(self, name: str):
         self.teachers = list()
         self.local_courses = list()
         self.offsite_courses = list()
         self.db = name
 
-    def all_local_courses(self):
+    def all_local_courses(self) -> list[ILocalCourse]:
+        """A function that creates and returns local courses"""
         db = sqlite3.connect(self.db)
         local_course = db.cursor(). execute(f"SELECT course.id, course.name, course.teacher_id, local_course.number_lab FROM course JOIN local_course ON course.id = local_course.course_id;")
         for local in local_course:
@@ -154,7 +163,8 @@ class Factory(IFactory):
                     teacher.add(local_course)
         return self.local_courses
 
-    def all_offsite_courses(self):
+    def all_offsite_courses(self) -> list[IOffsiteCourse]:
+        """A function that creates and returns offsite courses"""
         db = sqlite3.connect(self.db)
         offsite_course = db.cursor(). execute(f"SELECT course.id, course.name, course.teacher_id, offsite_course.address FROM course JOIN offsite_course ON course.id = offsite_course.course_id;")
         for offsite in offsite_course:
@@ -177,7 +187,8 @@ class Factory(IFactory):
                     teacher.add(offsite_course)
         return self.offsite_courses
 
-    def all_teachers(self):
+    def all_teachers(self) -> list[ITeacher]:
+        """A function that creates and returns teachers"""
         teachers = list()
         db = sqlite3.connect(self.db)
         response = db.cursor().execute("SELECT * FROM teacher;").fetchall()
@@ -203,13 +214,14 @@ class Factory(IFactory):
         return teachers
 
 
-X = Factory("./database.db")
-for l in X.all_local_courses():
-    print(l)
-# for t in X.all_teachers():
-#     print(t)
-for o in X.all_offsite_courses():
-    print(o)
+if __name__ == "__main__":
+    X = Factory("./database.db")
+    for l in X.all_local_courses():
+        print(l)
+    # for t in X.all_teachers():
+    #     print(t)
+    for o in X.all_offsite_courses():
+        print(o)
 
 
 
